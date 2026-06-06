@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Generated artefacts
+reports/*.pdf
+reports/*.md
+uploads/*
+!**/.gitkeep
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
