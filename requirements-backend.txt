@@ -1,0 +1,9 @@
+# Extra dependencies for the OPTIONAL FastAPI REST backend (backend/main.py).
+# Not required for the Streamlit app or Streamlit Cloud deployment.
+#   pip install -r requirements.txt -r requirements-backend.txt
+
+fastapi>=0.115,<0.116
+starlette>=0.37.2,<0.41
+uvicorn[standard]>=0.31
+python-multipart>=0.0.12
+requests>=2.32

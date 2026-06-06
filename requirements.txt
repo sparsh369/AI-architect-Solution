@@ -1,22 +1,26 @@
-# ── Core ───────────────────────────────────────────────────────────────
-streamlit==1.39.0
-fastapi==0.115.0
-starlette==0.38.6          # pinned: fastapi 0.115 is incompatible with starlette >=0.41
-uvicorn[standard]==0.31.0
-python-multipart==0.0.12   # required by FastAPI for file-upload endpoints
-pydantic==2.9.2
-python-dotenv==1.0.1
-requests==2.32.3
-# Pinned >=2.1 so pip uses a prebuilt wheel on Python 3.13 (1.26.x has no 3.13
-# wheel and would try — and fail — to compile from source).
-numpy>=2.1,<3
+# ── Streamlit app dependencies (what app.py actually needs) ───────────────
+# Ranges (not exact pins) so the resolver always finds prebuilt wheels for
+# whatever Python version Streamlit Cloud runs on.
 
-# ── AI / LLM ──────────────────────────────────────────────────────────
-# langchain >=0.3.7 dropped the numpy<2 cap that broke installs on Python 3.13.
+streamlit>=1.39,<2
+
+# AI / LLM — GPT-4o via LangChain. langchain >=0.3.27 dropped the numpy<2 cap
+# that breaks installs on Python 3.13+.
 langchain>=0.3.27,<0.4
 langchain-openai>=0.2.14,<0.4
-openai>=1.51.0
+openai>=1.51
 
-# ── PDF in / PDF out ──────────────────────────────────────────────────
-pypdf==5.0.1
-fpdf2==2.8.1
+# PDF in / PDF out
+pypdf>=5.0
+fpdf2>=2.8
+
+# Data models + config
+pydantic>=2.9,<3
+python-dotenv>=1.0
+
+# Force a prebuilt numpy wheel (avoids the 1.26.x source build that fails on 3.13).
+numpy>=2.1
+
+# NOTE: the optional FastAPI backend (backend/main.py) is NOT needed to run the
+# Streamlit app or to deploy on Streamlit Cloud. To run that backend locally,
+# also install:  pip install -r requirements-backend.txt
